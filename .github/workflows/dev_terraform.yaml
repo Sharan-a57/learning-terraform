@@ -1,9 +1,11 @@
-name: Terraforming
+name: dev_Environment
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'dev/**'
 
 permissions:
   id-token: write
@@ -13,7 +15,7 @@ env:
   AWS_REGION: us-east-1  # or your region
 
 jobs:
-  Terraform_plan:
+  DEV_Terraform_plan:
     runs-on: self-hosted
     steps:
       - name: Checkout code
@@ -25,6 +27,9 @@ jobs:
           role-to-assume: ${{ vars.awsOIDCroleARN }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Switching Environment
+        run: cd dev
+
       - name: Terraform Init
         run: terraform init
         
@@ -32,7 +37,7 @@ jobs:
         run: terraform plan
 
 # 
-  Terraform_apply:
+  DEV_Terraform_apply:
     runs-on: self-hosted
     needs: Terraform_plan
 
@@ -45,6 +50,9 @@ jobs:
         with:
           role-to-assume: ${{ vars.awsOIDCroleARN }}
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Switching Environment
+        run: cd dev
 
       - name: Terraform Init
         run: terraform init
