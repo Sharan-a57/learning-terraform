@@ -39,7 +39,7 @@ jobs:
 # 
   DEV_Terraform_apply:
     runs-on: self-hosted
-    needs: Terraform_plan
+    needs: DEV_Terraform_plan
 
     steps:
       - name: Checkout code
