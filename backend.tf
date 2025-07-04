@@ -1,6 +1,6 @@
 terraform {
  backend "s3" {
-   bucket = "tf-backend-trash" 
+   bucket = "tf-trash" 
    key    = "tfstatefile"
    region = "us-east-1"
  }
