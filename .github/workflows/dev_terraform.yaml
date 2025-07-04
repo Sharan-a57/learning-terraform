@@ -28,7 +28,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Switching Environment
-        run: cd dev
+        run: cd dev && ls
 
       - name: Terraform Init
         run: terraform init
