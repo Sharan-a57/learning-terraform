@@ -27,11 +27,8 @@ jobs:
           role-to-assume: ${{ vars.awsOIDCroleARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Switching Environment
-        run: cd dev && ls
-
       - name: Terraform Init
-        run: terraform init
+        run: cd dev && terraform init
         
       - name: Terraform Plan
         run: cd dev && terraform plan
